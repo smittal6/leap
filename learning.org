@@ -1,0 +1,10 @@
+* Day 1
+- Learnt about sampling rate. Can't continuously sample because that would mean infinite information. We store the pressure variations. There is this Nyquist frequency, at which we should sample. This is twice the max frequency in the audio sample. 
+- Then from an ultimate theorem, called Shanon sampling theorem, we can find the whole signal.
+
+- Why we go from time domain to Frequency?
+In time we can find when there is silence or not. For phonemes, which are fundamental speech units, there is a particular spectral envelope and a certain fine spectral structure. Doing Fourier Transform will help us find the required frequencies. Now we can define how many frequencies we want, the more we have the better it is. We keep it as the next power of 2, of our original frame size.
+
+- For finding the MFCC's: We'll take the absolute value, square it and apply Mel filters. Number of filters used are 40. The question is why 40? So we'll vary this number while finding MFCC's. We take the logarithm to convert the large scale, or in a better way, the large range, to a smaller one.
+Then some DCT is applied for some reason. Do find that out.
+* Day 2

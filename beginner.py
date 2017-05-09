@@ -1,11 +1,10 @@
 import sys
 import math
-import pylab
 import wave
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-import librosa as librosa
+# import librosa as librosa
 ### Input section
 
 #getting the wave_read object
@@ -28,7 +27,7 @@ np.set_printoptions(threshold='nan') #for printing the whole array, so that it d
 plt.title('Sample plotting')
 plt.plot(signal)
 plt.savefig('beginner.png')
-
+plt.close()
 ### Section for calculations, like FFT and MFCC
 
 #some definitions
@@ -41,7 +40,7 @@ shift_interval=1e-2 #10ms is defined to be the shift interval, for the windows.
 # print sampling_rate
 
 samples=int(sampling_rate*duration) #These are the number of array entries that we'll use to find the FFT
-skip_entries=int(sampling_rate*duration) #These entries are going to be skipped.
+skip_entries=int(sampling_rate*shift_interval) #These entries are going to be skipped.
 
 
 print "Number of data points in a frame: ",samples #displaying how many data points we are going to take
@@ -60,7 +59,9 @@ print "Number of frames required: ",columns
 #running the loop for finding the FFT Matrix
 for iterator in range(0,columns):
     vector_for_fft=signal[iterator*skip_entries:min(total_frames,samples+skip_entries*iterator)]
+    # print vector_for_fft
     hammer_size=vector_for_fft.shape[0]
+    # print iterator,hammer_size
     hamming_vector=np.hamming(hammer_size)
     hammed_vector=np.multiply(hamming_vector,vector_for_fft)
     fft_vector=np.fft.fft(hammed_vector,length_transformed)
@@ -70,9 +71,12 @@ for iterator in range(0,columns):
 # print fft_matrix.shape 
 
 plt.clf() #clearing the previous plot
-plt.plot(abs(fft_matrix[:,0])) #for complex values, abs returns the magnitude of the number
-plt.title("First column of the FFT Matrix")
-plt.xlabel("FFT Space Point")
-plt.ylabel("FFT Coefficient")
-plt.show()
+# plt.figure(figsize=(5,5))
+plt.xlim(0,200)
+plt.imshow(abs(fft_matrix),cmap="binary",aspect="auto") #for complex values, abs returns the magnitude of the number
+# plt.title("First column of the FFT Matrix")
+# plt.xlabel("FFT Space Point")
+# plt.ylabel("FFT Coefficient")
+# plt.show()
+plt.savefig('spectrogram.png')
 # print librosa.feature.mfcc(y=signal) #for checking the mfcc's
