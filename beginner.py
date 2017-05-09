@@ -38,7 +38,7 @@ duration=2.5e-2 #25ms is defined to be the duration for FFT
 shift_interval=1e-2 #10ms is defined to be the shift interval, for the windows.
 
 #verifying the sampling rate
-# print sampling_rate #verified. Correctly got the sampling rate.
+# print sampling_rate
 
 samples=int(sampling_rate*duration) #These are the number of array entries that we'll use to find the FFT
 skip_entries=int(sampling_rate*duration) #These entries are going to be skipped.
@@ -56,14 +56,23 @@ fft_matrix=np.empty([length_transformed,columns],dtype=np.complex_) #defining th
 
 print "Number of frames required: ",columns
 
+
 #running the loop for finding the FFT Matrix
 for iterator in range(0,columns):
-    fft_vector=np.fft.fft(signal[iterator*skip_entries:min(total_frames,samples+skip_entries*iterator)],length_transformed)
+    vector_for_fft=signal[iterator*skip_entries:min(total_frames,samples+skip_entries*iterator)]
+    hammer_size=vector_for_fft.shape[0]
+    hamming_vector=np.hamming(hammer_size)
+    hammed_vector=np.multiply(hamming_vector,vector_for_fft)
+    fft_vector=np.fft.fft(hammed_vector,length_transformed)
     fft_matrix[:,iterator]=fft_vector
-print fft_matrix.shape
 
-plt.clf()
-plt.plot(abs(fft_matrix[:,0]))
+#Checking the matrix shape that we have
+# print fft_matrix.shape 
+
+plt.clf() #clearing the previous plot
+plt.plot(abs(fft_matrix[:,0])) #for complex values, abs returns the magnitude of the number
 plt.title("First column of the FFT Matrix")
+plt.xlabel("FFT Space Point")
+plt.ylabel("FFT Coefficient")
 plt.show()
 # print librosa.feature.mfcc(y=signal) #for checking the mfcc's
