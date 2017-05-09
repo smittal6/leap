@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 ### Input section
 
 #getting the wave_read object
-raw=wave.open('myvoice.wav','r') #myvoice.wav has sampling rate of 16K Hz
+raw=wave.open(sys.argv[1],'r') #myvoice.wav has sampling rate of 16K Hz
 
 #reading all the frames. -1 indicates the end of file.
 signal=raw.readframes(-1)
@@ -37,7 +37,7 @@ duration=2.5e-2 #25ms is defined to be the duration for FFT
 shift_interval=1e-2 #10ms is defined to be the shift interval, for the windows.
 
 #verifying the sampling rate
-# print sampling_rate
+print "The sampling rate: ",sampling_rate
 
 samples=int(sampling_rate*duration) #These are the number of array entries that we'll use to find the FFT
 skip_entries=int(sampling_rate*shift_interval) #These entries are going to be skipped.
@@ -72,8 +72,8 @@ for iterator in range(0,columns):
 
 plt.clf() #clearing the previous plot
 # plt.figure(figsize=(5,5))
-plt.xlim(0,200)
-plt.imshow(abs(fft_matrix),cmap="binary",aspect="auto") #for complex values, abs returns the magnitude of the number
+plt.xlim(0,columns)
+plt.imshow(abs(fft_matrix),cmap="binary",aspect="auto") #for complex values, abs returns the mag of the number
 # plt.title("First column of the FFT Matrix")
 # plt.xlabel("FFT Space Point")
 # plt.ylabel("FFT Coefficient")
