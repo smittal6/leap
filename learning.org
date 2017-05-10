@@ -20,3 +20,8 @@ In time we can find when there is silence or not. For phonemes, which are fundam
   after 8 bits, new frame starts. Now, say we have stereo of 8 bits. Then in
   a 16 bit block, first 8 bit will be of one channel, and the other 8 bit of
   second channel. And this 16 bit will constitute one frame.
+- Steps for Mel: First find the power spectrum, apply filters, take the log
+  spectrum, then apply discrete cosine transform.
+- Taking filters and then we take the weighted mean. We need to find why
+  Discrete Cosine Transform. 
+
