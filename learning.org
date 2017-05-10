@@ -5,6 +5,18 @@
 - Why we go from time domain to Frequency?
 In time we can find when there is silence or not. For phonemes, which are fundamental speech units, there is a particular spectral envelope and a certain fine spectral structure. Doing Fourier Transform will help us find the required frequencies. Now we can define how many frequencies we want, the more we have the better it is. We keep it as the next power of 2, of our original frame size.
 
-- For finding the MFCC's: We'll take the absolute value, square it and apply Mel filters. Number of filters used are 40. The question is why 40? So we'll vary this number while finding MFCC's. We take the logarithm to convert the large scale, or in a better way, the large range, to a smaller one.
-Then some DCT is applied for some reason. Do find that out.
+- While taking FFT, we use a hamming window, to nullify the effects of
+  chosing the window, and to make the FFT feel like it is acting on
+  continuous function. Hamming window, which is a period of cosine wave.
+
+- For finding the MFCC's: We'll take the absolute value, square it and apply
+  Mel filters. Number of filters used are 40. The question is why 40? So
+  we'll vary this number while finding MFCC's. We take the logarithm to
+  convert the large scale, or in a better way, the large range, to a smaller
+  one. Hearing is based on a non linear [Mel] scale.Some DCT is applied for some reason. Do find that out.
+
 * Day 2
+- Learnt how mono and stereo files are stored. Lets say 8 bit mono. Then
+  after 8 bits, new frame starts. Now, say we have stereo of 8 bits. Then in
+  a 16 bit block, first 8 bit will be of one channel, and the other 8 bit of
+  second channel. And this 16 bit will constitute one frame.
