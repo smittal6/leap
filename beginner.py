@@ -39,7 +39,7 @@ plt.close()
 
 #some definitions
 duration=2.5e-2 #25ms is defined to be the duration for FFT
-shift_interval=1e-2 #10ms is defined to be the shift interval, for the windows.
+shift_interval=duration/2 #duration/2
 samples=int(sampling_rate*duration) #These are the number of array entries that we'll use to find the FFT
 skip_entries=int(sampling_rate*shift_interval) #These entries are going to be skipped.
 
@@ -69,19 +69,21 @@ for iterator in range(0,columns):
 #Checking the matrix shape that we have
 # print fft_matrix.shape 
 
-#creating the vector for mapping column to time, in the original signal.
+#Because we are getting inverted matrix, we will take the mirror image about x axis
+fft_matrix_useful=np.flipud(abs(fft_matrix[0:int(nfft/2),:]))
+### PLOTTING SPECTOGRAM
 xlim=columns*duration/2
 ylim=sampling_rate/2
 xtics=np.linspace(0,xlim,columns)
 ytics=np.linspace(0,ylim,int(nfft/2))
 plt.clf() #clearing the previous plot
-# ax=plt.gca()
-# ax.set_xticklabels(xtics)
 np.set_printoptions(precision=2)
-plt.imshow(20*np.log10(abs(fft_matrix[0:int(nfft/2),:])),cmap="binary",aspect="auto",extent=[0,xlim,0,ylim]) #for complex values, abs returns the mag of the number
+plt.imshow(20*np.log10(fft_matrix_useful),cmap="binary",aspect="auto",extent=[0,xlim,0,ylim]) #for complex values, abs returns the mag of the number
 plt.title("Spectogram")
 plt.xlabel("Time from Start")
 plt.ylabel("Frequency [Hz]")
 plt.colorbar()
-# plt.show()
 plt.savefig('spectrogram.png')
+plt.clf()
+### Done with plotting
+
