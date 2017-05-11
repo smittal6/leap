@@ -4,7 +4,7 @@ import scipy
 import matplotlib.pyplot as plt
 import scipy.stats
 # Some Variable declarations:
-datapoints=int(1e+2)
+datapoints=999
 kgaussian=3
 epoch=10
 def covmatrix(var,covar):
@@ -30,6 +30,7 @@ def initialize():
     mixingprob=np.random.random_sample(3)
     summix=np.sum(mixingprob)
     mixingprob=np.divide(mixingprob,summix)
+    print mixingprob
     return means,var,cov,mixingprob
 def evalloglike(data,means,var,cov,mixingprob):
     """ Computes the log likelihood
@@ -87,9 +88,15 @@ def ExpectMax():
     means,var,cov,mixingprob=initialize()
     print means
     print var
-    data=np.random.normal(1,2,33)
-    data2=np.random.normal(10,4,33)
-    data3=np.random.normal(3,1,34)
+    means=[5,20,50]
+    var=[2,5,6]
+    data=np.random.normal(5,2,datapoints/3)
+    data2=np.random.normal(20,5,datapoints/3)
+    data3=np.random.normal(50,6,datapoints/3)
+    plt.plot(data,color="r")
+    plt.plot(data2,color="b")
+    plt.plot(data3,color="g")
+    plt.show()
     # print data1
     data=np.append(data,data2)
     data=np.append(data,data3)
@@ -102,8 +109,10 @@ def ExpectMax():
             means,var,mixingprob=maximizestep(i,data,means,var,mixingprob)
         #Done updating[Maximizing for all the K guassian parameters]
         likelihood[iterator]=evalloglike(data,means,var,cov,mixingprob)
+    print "The obtained means,var and mixing prob"
     print means
     print var
+    print mixingprob
     plt.plot(abs(likelihood))
     plt.title("Likelihood vs Epoch")
     plt.xlabel("Epochs")
