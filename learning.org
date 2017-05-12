@@ -25,3 +25,19 @@ In time we can find when there is silence or not. For phonemes, which are fundam
 - Taking filters and then we take the weighted mean. We need to find why
   Discrete Cosine Transform. 
 
+* Day 4
+- Read about Neural Networks: Architecture, Need, Hidden Units, Output Units
+- What kind of functions are required for Hidden and output units
+- Used HTK tools: Specifically HCopy to generate MFCC and Delta And
+  Acceleration features.
+- Now, we actually need to find the frames where there is actual voice
+  activity. That is, we perfrom VAD. This is done is using rVAD, which is a
+  MAtlab based code. It requires as input a list, with each row having an
+  input wav file, output pitch file, and output VAD file. The structure of
+  VAD file is: Frame start, Frame End
+- BONUS: Map VAD FRames, by multiplying with hop window, onto the original
+  WAV files, and see how well VAD actually does, by changing the VAD thres.
+  The smaller VAD thres, the more Noise should we be getting.
+- Apply VAD Wrapper, to only get the features for the frames that match VAD
+  extraction. For this, Give a list containing, input feature file, vad file
+  and output feature file[keep it same, maybe?]
