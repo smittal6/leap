@@ -41,3 +41,9 @@ In time we can find when there is silence or not. For phonemes, which are fundam
 - Apply VAD Wrapper, to only get the features for the frames that match VAD
   extraction. For this, Give a list containing, input feature file, vad file
   and output feature file[keep it same, maybe?]
+* Day 5
+- Applying wrapper to use the VAD data on htk files. Essentially getting the
+  features for only the frames that contain voice activity.
+- Possible features: MFCC, Kurtosis, Spectral Flatness Measure, Context. I'm
+  just using MFCC as a beginner stuff.
+
