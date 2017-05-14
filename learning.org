@@ -47,3 +47,7 @@ In time we can find when there is silence or not. For phonemes, which are fundam
 - Possible features: MFCC, Kurtosis, Spectral Flatness Measure, Context. I'm
   just using MFCC as a beginner stuff.
 
+* Day 6
+- Learnt about neaural nets, essentially the back propogation algorithm which
+  uses the derivatives found in higher layers, to find the derivatives for
+  lower layers.
