@@ -38,13 +38,14 @@ def seq(x_train,y_train,x_test,y_test):
     #Defining the structure of the neural network
     #Creating a Network, with 2 hidden layers.
     model=Sequential()
-    model.add()
-    model.add()
-
+    model.add(Dense(64,activation='relu',input_shape=(x_train.shape[1]))) #Input layer
+    model.add(Dense(32,activation='relu')) #Hidden layer 1
+    model.add(Dense(16,activation='relu')) #Hidden layer 2
+    model.add(Dense(1,activation='sigmoid')) #Output Layer
     #Compilation region: Define optimizer, cost function, and the metric?
-
+    model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
     #Fitting region:Get to fit the model, with training data
-
+    model.fit(x_train,y_train,epoch=epochs,batch_size=batch)
 
 #Non-function section
 x_train,y_train=load_data_train(trainfile)
@@ -53,3 +54,10 @@ print "Shape test: ",x_train.shape," ",y_train.shape
 x_test,y_test=load_data_test(testfile)
 print "Loading test data complete"
 print "Shape test: ",x_test.shape," ",y_test.shape
+
+#Some parameters for training the model
+epochs=10 #Number of iterations to be run on the model while training
+batch=128 #Batch size to be used while training
+
+#Calling the seq model, with 2 hidden layers
+seq(x_train,y_train,x_test,y_test)
