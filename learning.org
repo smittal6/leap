@@ -1,9 +1,7 @@
 * Day 1
-- Learnt about sampling rate. Can't continuously sample because that would mean infinite information. We store the pressure variations. There is this Nyquist frequency, at which we should sample. This is twice the max frequency in the audio sample. 
-- Then from an ultimate theorem, called Shanon sampling theorem, we can find the whole signal.
+- Learnt about sampling rate. Can't continuously sample because that would mean infinite information. We store the pressure variations. There is this Nyquist frequency, at which we should sample. This is twice the max frequency in the audio sample. Then from an ultimate theorem, called Shanon sampling theorem, we can find the whole signal.
 
-- Why we go from time domain to Frequency?
-In time we can find when there is silence or not. For phonemes, which are fundamental speech units, there is a particular spectral envelope and a certain fine spectral structure. Doing Fourier Transform will help us find the required frequencies. Now we can define how many frequencies we want, the more we have the better it is. We keep it as the next power of 2, of our original frame size.
+- Why we go from time domain to Frequency? In time we can find when there is silence or not. For phonemes, which are fundamental speech units, there is a particular spectral envelope and a certain fine spectral structure. Doing Fourier Transform will help us find the required frequencies. Now we can define how many frequencies we want, the more we have the better it is. We keep it as the next power of 2, of our original frame size.
 
 - While taking FFT, we use a hamming window, to nullify the effects of
   chosing the window, and to make the FFT feel like it is acting on
@@ -51,3 +49,8 @@ In time we can find when there is silence or not. For phonemes, which are fundam
 - Learnt about neaural nets, essentially the back propogation algorithm which
   uses the derivatives found in higher layers, to find the derivatives for
   lower layers.
+
+* 16, May:
+- Equal error rate: In any biometric system, we would want to minimize the
+  number of false positives and the false negatives that we get. This is the
+  most used error rate, in ASR and stuff.
