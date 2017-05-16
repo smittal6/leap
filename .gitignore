@@ -1,5 +1,15 @@
 *.swp
+*.pyc
 .*
 *.ipynb
 *~
-/overlap_neeraj
+/siddharth/WAV/
+/siddharth/combhtk/
+/siddharth/feats/
+/siddharth/lists/
+/siddharth/overlap/
+/siddharth/overlap_train/
+/siddharth/rVAD1.0/
+/siddharth/train/
+/siddharth/vad_overlap/
+
