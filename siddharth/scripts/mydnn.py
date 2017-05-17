@@ -20,8 +20,10 @@ import sys
 import os
 
 np.random.seed(1337)
-trainfile="/home/smittal/Desktop/coding/leap/siddharth/combhtk/alltest.htk"
-testfile="/home/smittal/Desktop/coding/leap/siddharth/combhtk/alltrain.htk"
+trainfile="/home/smittal/Desktop/coding/leap/siddharth/combhtk/alltrain.htk"
+testfile="/home/smittal/Desktop/coding/leap/siddharth/combhtk/alltest.htk"
+# trainfile="/home/neerajs/siddharth/combhtk/alltrain.htk"
+# testfile="/home/neerajs/siddharth/combhtk/alltest.htk"
 def load_data_train(trainfile):
     a=htk.open(trainfile)
     data=a.getall()
