@@ -79,5 +79,5 @@ for i in range(0,4):
         # wri=htk.open(savdirec+re.split("[*.*]",f[j])[0]+'.htk',mode='w',veclen=frames-1)
         # print kurt_vals.shape
         # wri.writeall(kurt_val)
-        sio.savemat(savdirec+re.split('[*.*]',f[i])[0]+'.mat',{'kurt':kurt_val})
+        sio.savemat(savdirec+re.split('[*.*]',f[j])[0]+'.mat',{'kurt':kurt_val})
     print "Finish i=",i
