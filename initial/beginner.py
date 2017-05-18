@@ -58,7 +58,8 @@ print "Number of data points in a frame: ",samples #displaying how many data poi
 print "Total data points: ",total_frames #This denotes the number of total data collected, ie all the pressure variations recorded.
 print "Number of frames required: ",columns
 
-
+### WARNING: The following section is not correct. It takes moer frames.
+### Please see the kurtosis code, for exact windowing.
 for iterator in range(0,columns):
     vector_for_fft=signal[iterator*skip_entries:min(total_frames,samples+skip_entries*iterator)]
     hammer_size=vector_for_fft.shape[0]
