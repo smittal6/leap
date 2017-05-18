@@ -60,17 +60,17 @@ for i in range(0,4):
         iterator=0 #Just an iterator to control start and end points
         length=0 #Keeps track of the length that we have covered
         frames=0 #Keeps track of the number of frames
-        while length<total_frames:
+        while length<total_frames-1:
             start=iterator*skip_entries
             end=samples+start
             if end<total_frames:
                 vector_for_kurt=signal[0][start:end]
                 kurt_vals.append(stats.kurtosis(vector_for_kurt,fisher=False))
-                length=length+samples
+                length=end
             else:
                 vector_for_kurt=signal[0][start:total_frames]
                 kurt_vals.append(stats.kurtosis(vector_for_kurt,fisher=False))
-                length=length+end-start+1
+                length=total_frames
             iterator+=1
             frames+=1
         #Done with the loop
