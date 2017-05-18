@@ -1,4 +1,4 @@
-function list = apply_vad_apply_cmvn(inFile, vadFilename, outFile, rem_list)
+function list = vad_apply_kurtosis(inFile, vadFilename, outFile, rem_list)
 
 
 % reads features with HTK format
@@ -20,7 +20,7 @@ end
 try
 %	[data,fp,dt,tc,t] = readhtk(inFile);
 	dat=load(inFile);
-	data=dat.sfm_vals;
+	data=dat.kurt;
 
 catch ME
 	ME
