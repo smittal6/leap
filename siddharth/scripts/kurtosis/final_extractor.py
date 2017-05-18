@@ -52,8 +52,8 @@ for i in range(0,4):
         #some definitions
         duration=2.5e-2 #25ms is defined to be the duration for FFT
         shift_interval=1.0e-2 #duration
-        samples=int(math.ceil(sampling_rate*duration)) #These are the number of array entries that we'll use to find the kurtosis
-        skip_entries=int(math.ceil(sampling_rate*shift_interval)) #These entries are going to be skipped, that is we'll move to the next frame byb leaving these entries
+        samples=int(math.floor(sampling_rate*duration)) #These are the number of array entries that we'll use to find the kurtosis
+        skip_entries=int(math.floor(sampling_rate*shift_interval)) #These entries are going to be skipped, that is we'll move to the next frame byb leaving these entries
         # columns=int(math.ceil(total_frames/skip_entries))
         kurt_vals=[]
         signal=skp.normalize(signal)
@@ -75,8 +75,9 @@ for i in range(0,4):
             frames+=1
         #Done with the loop
         kurt_vals=np.asarray(kurt_vals)
-        wri=htk.open(savdirec+re.split("[*.*]",f[j])[0]+'.htk',mode='w',veclen=frames)
+        kurt_val=kurt_vals[0:frames-1]
+        # wri=htk.open(savdirec+re.split("[*.*]",f[j])[0]+'.htk',mode='w',veclen=frames-1)
         # print kurt_vals.shape
-        wri.writeall(kurt_vals)
-        #sio.savemat(savdirec+re.split('[*.*]',f[i])[0]+'.mat',{'kurt':kurt_vals})
+        # wri.writeall(kurt_val)
+        sio.savemat(savdirec+re.split('[*.*]',f[i])[0]+'.mat',{'kurt':kurt_val})
     print "Finish i=",i
