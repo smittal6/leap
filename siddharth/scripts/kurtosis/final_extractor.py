@@ -52,15 +52,15 @@ for i in range(0,4):
         #some definitions
         duration=2.5e-2 #25ms is defined to be the duration for FFT
         shift_interval=1.0e-2 #duration
-        samples=int(math.floor(sampling_rate*duration)) #These are the number of array entries that we'll use to find the kurtosis
-        skip_entries=int(math.floor(sampling_rate*shift_interval)) #These entries are going to be skipped, that is we'll move to the next frame byb leaving these entries
+        samples=int(math.ceil(sampling_rate*duration)) #These are the number of array entries that we'll use to find the kurtosis
+        skip_entries=int(math.ceil(sampling_rate*shift_interval)) #These entries are going to be skipped, that is we'll move to the next frame byb leaving these entries
         # columns=int(math.ceil(total_frames/skip_entries))
         kurt_vals=[]
         signal=skp.normalize(signal)
         iterator=0 #Just an iterator to control start and end points
         length=0 #Keeps track of the length that we have covered
         frames=0 #Keeps track of the number of frames
-        while length<total_frames-1:
+        while length<total_frames:
             start=iterator*skip_entries
             end=samples+start
             if end<total_frames:

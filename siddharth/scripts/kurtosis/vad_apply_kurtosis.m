@@ -61,10 +61,10 @@ catch ME
         disp('yolo fourth')
 	return
 end
-sfm_vals=data;
+kurt=data;
 %normdata = cmvn(data);
 %normdata = normdata';
-save(outFile,'sfm_vals')
+save("-6",outFile,'kurt')
 %writehtk(outFile,normdata,fp,tc);
 
 list = rem_list;
