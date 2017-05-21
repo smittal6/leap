@@ -50,7 +50,27 @@
   uses the derivatives found in higher layers, to find the derivatives for
   lower layers.
 
-* 16, May:
+* May 16:
 - Equal error rate: In any biometric system, we would want to minimize the
   number of false positives and the false negatives that we get. This is the
   most used error rate, in ASR and stuff.
+* May 17-18:
+- Read about Convolutional Neural Nets. The core idea being in 
+* May 19:
+- Got to know about spectral flatness measure. This essentially measures how
+  noise like, or how tone like, is the signal. We take the GM of power
+  spectrum divided by AM of power spectrum. If the signal is noise like, that
+  is a lot of frequencies have the same power spectrum, the SFM value will
+  tend to be closer to one.
+- Also, trained simple DNN models based on MFCC and Kurtosis. Using Kurtosis
+  only marginally improves the performance.
+
+* May 21:   
+- Learnt about spectral flatness value and why it makes sense to find the sfm
+  with log values, as while taking the geometric mean, the gm falls because
+  of the chracteristic of Spectral Flatness is such that most of the values
+  decrease. Thus if we take log, it will fall less, and thus sfm can be more
+  useful as a feature.
+- Also, white noise, ideally should have an SFM of 1, though in practice it
+  turns out to be close to 0.6-0.7
+
