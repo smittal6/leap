@@ -13,14 +13,15 @@ import librosa.util
 import re
 import htkmfc as htk
 from scipy import stats
-from scipy import signal
+from scipy import signal as sg
+
+eps=1e-10
 
 #first overlap train, then overlap test, then single train, single test
-
 #These are the raw lists, which essentially contain the names of wav files.
-FILES=["/home/smittal/Desktop/coding/leap/siddharth/lists/overlap_train_raw.list",
+FILES=["/home/smittal/Desktop/coding/leap/siddharth/lists/overlaptrain/overlap_train_raw.list",
        "/home/smittal/Desktop/coding/leap/siddharth/lists/overlaptest/overtestraw.list",
-       "/home/smittal/Desktop/coding/leap/siddharth/lists/raw_input.list",
+       "/home/smittal/Desktop/coding/leap/siddharth/lists/singletrain/raw_input.list",
        "/home/smittal/Desktop/coding/leap/siddharth/lists/singletest/singletestraw.list"
       ]
 #We store the directories where raw audio files are stored, so that we can process them, and extract the feature that we want. if it is not MFCC
@@ -47,6 +48,7 @@ for i in range(0,4):
     f=f.strip()
     f=re.split('\n',f)
     for j in range(len(f)):
+    # for j in range(10):
         raw=wave.open(direc+f[j],'r')
         nchannels,sampwidth,sampling_rate,total_frames,comptype,compname=raw.getparams()
         sampling_rate,data=sciwav.read(direc+f[j])
@@ -73,17 +75,25 @@ for i in range(0,4):
             if end<total_frames:
                 vector_for_sfm=signal[0][start:end]
                 # sfm_vals.append(stats.kurtosis(vector_for_kurt,fisher=False))
-                [freqs,psd]=signal.periodogram(vector_for_sfm,512) #512 point fft, as our signals are usually sampled at 16K and we use 25 ms window size
+                [freqs,psd]=sg.periodogram(vector_for_sfm,512) #512 point fft, as our signals are usually sampled at 16K and we use 25 ms window size
+                # print psd
+                # for a in psd:
+                    # if a==0:
+                        # print "Encountered 0: ",a
+                # psd=np.abs(10*np.log10(psd+eps))
                 sfm=stat.gmean(psd)/(np.mean(psd)+eps)
+                # print sfm
                 sfm_vals.append(sfm)
                 length=end
             else:
                 vector_for_sfm=signal[0][start:total_frames]
                 # sfm_vals.append(stats.kurtosis(vector_for_kurt,fisher=False))
-                [freqs,psd]=signal.periodogram(vector_for_sfm,512)
+                [freqs,psd]=sg.periodogram(vector_for_sfm,512)
+                psd=np.abs(10*np.log10(psd))
                 sfm=stat.gmean(psd)/(np.mean(psd)+eps)
                 sfm_vals.append(sfm)
                 length=total_frames
+            # print 'SFM value: ',sfm
             iterator+=1
             frames+=1
         #Done with the loop
