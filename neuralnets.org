@@ -1,0 +1,52 @@
+* Basics
+- Introduction with respect to perceptrons
+- How can we make them learn ? A small change in weights and bias of one unit
+  may effect the whole output to get changed, for the training data for which
+  no change was required.
+- This acts as a motivation for sigmoid units: Their derivative is not very
+  strong, meaning they don't change drastically, when the input is changed
+  marginally. It is just smoothed out version of the step function.
+- Output of sigmoid is a real number between 0 and 1. Say we want to classify
+  as Binary thing, it would make sense to define a threshold above which it
+  is one class, and different class below it.
+- Important stuff: Cost function, update
+- To Quote: 'Why introduce the quadratic cost? After all, aren't we primarily
+  interested in the number of images correctly classified by the network? Why
+  not try to maximize that number directly, rather than minimizing a proxy
+  measure like the quadratic cost? The problem with that is that the number
+  of images correctly classified is not a smooth function of the weights and
+  biases in the network. For the most part, making small changes to the
+  weights and biases won't cause any change at all in the number of training
+  images classified correctly. That makes it difficult to figure out how to
+  change the weights and biases to get improved performance. If we instead
+  use a smooth cost function like the quadratic cost it turns out to be easy
+  to figure out how to make small changes in the weights and biases so as to
+  get an improvement in the cost. That's why we focus first on minimizing the
+  quadratic cost, and only after that will we examine the classification
+  accuracy.'
+- Why to use binary or categorical cross entropy as the cost function?
+  Because derivative of Square cost function tends to flatten, thus learning
+  tends to be slow.
+- To minimize we can't just use the plot, or use calculus
+  directly(analytically), but if we have a billion variables to deal with,
+  this may become a big problem. So we use the idea of a ball rolling down a
+  valley.
+- Relate change in Cost function with respect to paramters. We use the
+  gradient. We always want the gradient update to be negative. This acts as a
+  motivation to chose update in parameter which is learning rate times the
+  gradient vector.
+- Problem of not being sure about the hyperparamters.
+- Learning slowdown: With quadratic cost function and sigmoid neuron, the
+  weight updates(the nuerons) tend to get saturated. So we use categorical
+  cross entropy with sigmoid, which is essentially a way to measure
+  surpurise. Else, use softmax neuron, which is like mapping outputs to a
+  probability distribution along with log likelihood cost function is also
+  similar. Thus, softmax and log L, vs Sigmoid and cross entropy. 
+
+* Overfitting and Generalization
+ - If our model has lots of parameters, it can obviously adopt to the
+   training data. That is it is just trying to fit the training data without
+   learning insights into the actual relation between the data
+ - One way to stop overfitting: stop training once a saturation is reached in
+   validation accuracy. The use of validation data is obvious, so as to
+   ensure the network doesn't learn pecularities of the test data.
