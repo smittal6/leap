@@ -1,8 +1,6 @@
 * Basics
-- Introduction with respect to perceptrons
-- How can we make them learn ? A small change in weights and bias of one unit
-  may effect the whole output to get changed, for the training data for which
-  no change was required.
+ - Introduction with respect to perceptrons
+ - How can we make them learn ? A small change in weights and bias of one unit may effect the whole output to get changed, for the training data for which no change was required.
 - This acts as a motivation for sigmoid units: Their derivative is not very
   strong, meaning they don't change drastically, when the input is changed
   marginally. It is just smoothed out version of the step function.
@@ -43,10 +41,62 @@
   probability distribution along with log likelihood cost function is also
   similar. Thus, softmax and log L, vs Sigmoid and cross entropy. 
 
-* Overfitting and Generalization
+* Overfitting
  - If our model has lots of parameters, it can obviously adopt to the
    training data. That is it is just trying to fit the training data without
    learning insights into the actual relation between the data
  - One way to stop overfitting: stop training once a saturation is reached in
    validation accuracy. The use of validation data is obvious, so as to
-   ensure the network doesn't learn pecularities of the test data.
+   ensure the network doesn't learn pecularities of the test data. This is
+   known as the hold out method.
+ - Another strategy to reduce overfitting: increase the amount of training
+   data. With enough training data, even a large network will be hard to
+   overfit. Intiution is as follows: Ovefitting means trying to account for
+   every piece of data, since the data is large enough, overfitting is going
+   to be tough. On the downside, there are other considerations like the time
+   network will take to learn and also how can we increase the size of
+   training data.
+* Regularization
+ - The idea is to add a regularization term, to the cost function. We have a
+   variable which controls the effect of regularization.
+ - This intuitively suggests that we want the network to learn small
+   weights. Small lambda would mean more preference to cost minimization is
+   given, as the weights are being multiplied by a factor which is small. A large lambda, on the other hand, implies we have to keep our weights small.
+ - Weight decay, coming from adding the regularization term. But it is not
+   truly right, as the weight may still increase.
+ - By using regularization, we are trying to keep the weights small. Thus if
+   the model is unregularized, large weights will affect the model output
+   coming from small changes in the input. This means the model would try to
+   learn the noise, rather than the insight.
+ - L1 regularization vs L2 regularization: The thing with L2 is its weight
+   decrement has the term which is proportional to weight itself. Thus a
+   large weight would get more quickly surpressed.
+
+* Proof that neural nets can compute any function
+ - It was just a visual proof. Essentially using a pair of nuerons setting
+   the weights very high, the sigmoid almost becomes a step function and then
+   we play with bias to set where the step occurs.
+ - Use a lot of them and we can approximate any function
+
+* Training slow down with neural nets
+ - If we use multilayer neural net, standard backpropogation results in
+   learning slowdown. This is because of the fact that derivatives
+   accumulate, and the maximum derivative for sigmoid is 0.25. We could use
+   larger weights, but then we have a restriction with respect to getting the
+   largest derivative. 
+ - We could also have something called as learning explosion, which is just
+   the opposite of this.
+ - The fundamental problem is of the unstability of the gradient. The
+   gradient at the lower layers is product of derivatives at higher layer.
+   If we want learning at same rate, the derivatives must balance out
+   somehow. The fact that they'll balance out themselves is highly unlikely.
+   Thus there is unstability in the gradient, and the layers learn at
+   different rates.
+
+* ASK
+ - We don't have an entirely satisfactory systematic understading of what is
+   going on. Why not? We just said regularization means smaller weights, thus
+   less interference due to noise. What does the author mean by satisfactory
+   understanding?
+ - 50,000 images, 80 K parameters. Over fitting but it doesn't. Self
+   regularization effect?
