@@ -1,7 +1,0 @@
-WAV/ contains the test and train data, raw as audio files
-train/ contains stuff done on training set, like using HTK to calculate mfcc's, this is only for single speaker files
-overlap_train/ contains stuff done on training set, for overlap speech examples
-scripts/ contains the scripts used and auxiliary stuff for scripts
-lists/ contains the lists required by different scripts. [At the time of writing, Hcopy requires the lists]
-0 will be the label for single speaker, and 1 will be the label for multiple speaker
-overlap/ has the overlap speech wav files, with test and train data separated. Original source: TEST22 and TRAIN22 in the Overlap_Corpus found in neeraj's work directory
